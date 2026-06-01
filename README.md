@@ -1,4 +1,4 @@
-# Proyek Data Scientist Menyelesaikan Permasalahan attrition rate di perusahaan multinasional Jaya Jaya Maju
+# Proyek Data Scientist Transaction Behavior Segmentation for Fraud Risk Analysis
 
 ## Business Understanding
 
@@ -8,13 +8,20 @@
 
 ### Latar Belakang 
 
-#### Latar Belakang Bisnis Jaya Jaya Maju
+#### Latar Belakang
 
-Jaya Jaya Maju adalah sebuah perusahaan multinasional yang telah berdiri sejak tahun 2000 dan berkembang pesat hingga memiliki lebih dari 1000 karyawan yang tersebar di berbagai wilayah di negeri ini. Sebagai perusahaan besar yang terus berusaha untuk meningkatkan kinerja dan ekspansinya, manajemen Jaya Jaya Maju sangat bergantung pada sumber daya manusia yang berkualitas dan produktif.
+## Latar Belakang
 
-Namun, meskipun sudah memiliki skala yang besar, perusahaan menghadapi tantangan serius dalam pengelolaan karyawan, terutama terkait tingginya tingkat attrition rate, yaitu rasio karyawan yang keluar dari perusahaan dibandingkan dengan total karyawan secara keseluruhan. Saat ini, attrition rate perusahaan sudah melebihi 10%, yang dapat berdampak negatif terhadap stabilitas operasional, produktivitas, dan biaya yang dikeluarkan untuk rekrutmen dan pelatihan karyawan baru.
+Perkembangan layanan perbankan digital telah meningkatkan volume dan kompleksitas transaksi keuangan yang terjadi setiap hari. Seiring dengan meningkatnya aktivitas transaksi melalui berbagai kanal seperti online banking, ATM, dan kantor cabang, risiko terjadinya penipuan (fraud) juga semakin tinggi. Fraud dalam sektor keuangan dapat menyebabkan kerugian finansial yang signifikan bagi institusi maupun nasabah, sehingga diperlukan mekanisme analisis yang mampu mengidentifikasi pola transaksi yang berpotensi mencurigakan secara lebih efektif.
 
-Masalah ini menjadi perhatian utama departemen Human Resources (HR), yang ingin memahami faktor-faktor utama penyebab tingginya attrition tersebut dan berupaya melakukan langkah-langkah strategis untuk mengurangi angka tersebut. Untuk itu, diperlukan analisis mendalam dan sistem pemantauan yang efektif agar manajemen dapat mengambil keputusan berbasis data dan melakukan intervensi tepat waktu dalam pengelolaan karyawan.
+Salah satu tantangan utama dalam mendeteksi fraud adalah keberagaman perilaku transaksi setiap nasabah. Tidak semua transaksi dengan nilai besar atau frekuensi tinggi dapat dikategorikan sebagai aktivitas mencurigakan. Oleh karena itu, diperlukan pendekatan yang mampu mengelompokkan transaksi berdasarkan karakteristik dan pola perilakunya terlebih dahulu sebelum dilakukan proses klasifikasi atau deteksi fraud secara lebih spesifik.
+
+Proyek **Transaction Behavior Segmentation for Fraud Risk Analysis** bertujuan untuk melakukan segmentasi perilaku transaksi menggunakan teknik *clustering* pada dataset yang terdiri dari **2.512 data transaksi**. Dataset ini mencakup berbagai atribut penting seperti nilai transaksi (*TransactionAmount*), jenis transaksi (*TransactionType*), saldo rekening (*AccountBalance*), durasi transaksi (*TransactionDuration*), jumlah percobaan login (*LoginAttempts*), kanal transaksi (*Channel*), serta karakteristik demografis pengguna seperti usia dan pekerjaan. Kombinasi atribut tersebut memberikan gambaran yang komprehensif mengenai perilaku transaksi setiap nasabah.
+
+Melalui proses clustering, transaksi akan dikelompokkan ke dalam beberapa segmen berdasarkan kemiripan pola aktivitas keuangan. Hasil segmentasi ini dapat membantu mengidentifikasi kelompok transaksi dengan karakteristik normal, kelompok berisiko menengah, hingga kelompok yang menunjukkan indikasi perilaku tidak biasa atau berpotensi fraud. Selain memberikan pemahaman yang lebih mendalam terhadap pola transaksi pelanggan, hasil clustering juga dapat digunakan sebagai dasar dalam pengembangan model klasifikasi pada tahap selanjutnya.
+
+Dengan memanfaatkan pendekatan segmentasi perilaku transaksi, institusi keuangan dapat meningkatkan kemampuan pemantauan risiko, mengoptimalkan proses investigasi transaksi mencurigakan, serta mendukung pengambilan keputusan yang lebih cepat dan akurat dalam upaya pencegahan fraud. Oleh karena itu, proyek ini diharapkan mampu menghasilkan segmentasi yang representatif terhadap perilaku transaksi nasabah dan menjadi fondasi yang kuat untuk pengembangan sistem analisis risiko fraud yang lebih cerdas dan efektif.
+
 
 ------------------------------
 
@@ -22,20 +29,18 @@ Masalah ini menjadi perhatian utama departemen Human Resources (HR), yang ingin 
 
 #### Permasalahan Bisnis yang Akan Diselesaikan
 
-1. **Tingginya Tingkat Attrition Karyawan**
-   Jaya Jaya Maju mengalami tingkat attrition yang cukup tinggi, lebih dari 10%, yang menyebabkan kehilangan karyawan secara signifikan dan berdampak pada stabilitas operasional perusahaan.
+1. **Perusahaan belum memiliki segmentasi pelanggan berdasarkan perilaku transaksi**, sehingga sulit memahami karakteristik masing-masing kelompok pelanggan.
 
-2. **Kesulitan dalam Mengidentifikasi Faktor Penyebab Attrition**
-   Perusahaan belum memiliki pemahaman yang jelas dan terstruktur mengenai faktor-faktor apa saja yang menyebabkan karyawan memilih untuk keluar dari perusahaan.
+2. **Sulit mengidentifikasi pelanggan dengan pola transaksi yang berpotensi berisiko**, karena seluruh pelanggan diperlakukan sebagai satu kelompok yang sama.
 
-3. **Kurangnya Sistem Monitoring yang Efektif untuk HR**
-   Departemen HR belum memiliki dashboard atau alat pemantauan yang mudah diakses dan informatif untuk memonitor kondisi karyawan dan faktor-faktor risiko yang berkontribusi pada attrition secara real-time.
+3. **Belum diketahui kelompok pelanggan mana yang memiliki aktivitas transaksi tinggi, saldo besar, atau pola transaksi yang tidak biasa**, sehingga proses monitoring menjadi kurang efektif.
 
-4. **Tantangan dalam Pengambilan Keputusan Berbasis Data**
-   Kurangnya insight dan data analitik membuat manajemen kesulitan dalam mengambil tindakan preventif yang tepat dan terukur untuk mengurangi tingkat attrition.
+4. **Kurangnya informasi mengenai perbedaan perilaku transaksi antar pelanggan**, yang dapat menghambat pengambilan keputusan terkait manajemen risiko dan strategi bisnis.
 
-5. **Dampak Negatif dari Attrition terhadap Biaya dan Produktivitas**
-   Tingginya attrition meningkatkan biaya rekrutmen, pelatihan, serta mengurangi produktivitas akibat kehilangan karyawan berpengalaman dan perlu adaptasi karyawan baru.
+5. **Perusahaan membutuhkan pengelompokan pelanggan yang objektif dan berbasis data** untuk mendukung analisis risiko serta memahami pola transaksi pelanggan secara lebih mendalam.
+
+6. **Belum tersedia label segmentasi pelanggan** yang dapat digunakan sebagai dasar pengembangan model klasifikasi pada tahap selanjutnya untuk mengotomatisasi identifikasi kelompok pelanggan baru.
+
 
 ------------------------------
 
@@ -43,40 +48,37 @@ Masalah ini menjadi perhatian utama departemen Human Resources (HR), yang ingin 
 
 #### Cakupan Proyek
 
-1. **Pengumpulan dan Pemahaman Data**
+1. Menggunakan dataset transaksi perbankan yang berisi **2.512 data transaksi** dengan atribut transaksi, informasi akun, dan profil pelanggan.
 
-   * Mengumpulkan dataset karyawan yang mencakup informasi demografi, pekerjaan, performa, dan status keluar masuk karyawan.
-   * Memahami struktur dan kualitas data yang tersedia.
+2. Melakukan **data understanding** untuk memahami karakteristik, tipe data, dan distribusi setiap fitur dalam dataset.
 
-2. **Eksplorasi Data dan Analisis Deskriptif**
+3. Melakukan **data preprocessing** yang meliputi pembersihan data, penanganan missing value (jika ada), encoding fitur kategorikal, dan normalisasi/standardisasi fitur numerik.
 
-   * Melakukan eksplorasi data untuk mengetahui pola distribusi karyawan dan tren attrition.
-   * Mengidentifikasi hubungan awal antara berbagai faktor dengan tingkat attrition.
+4. Melakukan **Exploratory Data Analysis (EDA)** untuk mengidentifikasi pola, distribusi data, dan hubungan antar variabel yang relevan terhadap perilaku transaksi pelanggan.
 
-3. **Identifikasi Faktor Penyebab Attrition**
+5. Membangun model **K-Means Clustering** untuk mengelompokkan pelanggan berdasarkan karakteristik dan perilaku transaksinya.
 
-   * Menggunakan teknik statistik dan machine learning untuk mengidentifikasi variabel yang berpengaruh signifikan terhadap keputusan karyawan untuk keluar.
-   * Membuat model prediktif untuk menentukan risiko attrition karyawan.
+6. Menentukan jumlah cluster optimal menggunakan metode evaluasi clustering seperti **Elbow Method** dan **Silhouette Score**.
 
-4. **Pengembangan Dashboard Bisnis**
+7. Menganalisis karakteristik setiap cluster untuk memperoleh insight mengenai segmentasi perilaku transaksi pelanggan.
 
-   * Merancang dan membangun dashboard interaktif menggunakan Metabase yang menampilkan metrik-metrik penting terkait attrition dan faktor-faktor pendukungnya.
-   * Memastikan dashboard dapat diakses dan dipahami oleh manajer HR untuk monitoring dan pengambilan keputusan.
+8. Memberikan interpretasi bisnis terhadap hasil segmentasi yang dihasilkan, termasuk identifikasi kelompok pelanggan yang memiliki karakteristik transaksi berbeda.
 
-5. **Rekomendasi Strategi dan Tindak Lanjut**
+9. Menghasilkan label cluster yang dapat digunakan sebagai dasar pengembangan model klasifikasi atau sistem analisis risiko pada tahap selanjutnya.
 
-   * Memberikan insight dan rekomendasi berbasis data kepada manajemen HR untuk mengurangi tingkat attrition.
-   * Menyusun langkah-langkah strategis yang bisa diambil berdasarkan hasil analisis.
+### Di luar cakupan proyek
 
-6. **Membuat Model Machine Learning**
+* Pembuatan model fraud detection secara langsung.
+* Prediksi transaksi fraud secara real-time.
+* Implementasi sistem ke lingkungan produksi (*deployment*).
+* Integrasi dengan sistem perbankan atau database operasional.
 
-   * Mengembangkan model machine learning berbasis klasifikasi untuk memprediksi status karyawan berdasarkan variabel-variabel faktor penyebab attrition
 
 ------------------------------
 
 ### Persiapan
 
-**Data source:** [Employee data](https://github.com/dicodingacademy/dicoding_dataset/tree/main/employee 'Dicoding GitHub - Employee data')
+**Data source:** https://docs.google.com/spreadsheets/d/e/2PACX-1vTbg5WVW6W3c8SPNUGc3A3AL-AG32TPEQGpdzARfNICMsLFI0LQj0jporhsLCeVhkN5AoRsTkn08AYl/pub?output=csv
 
 #### Setup Environment:
 
@@ -116,13 +118,6 @@ Ikuti langkah-langkah berikut untuk menjalankan proyek ini di lingkungan lokal A
 
 * Pastikan Anda sudah menginstal **Python 3.8 atau lebih tinggi**.
 * Gunakan `python` atau `python3` sesuai dengan OS dan pengaturan sistem Anda.
-* Jika menggunakan **Anaconda**, Anda bisa membuat environment dengan:
-
-  ```bash
-  conda create --name attrition-env python=3.9
-  conda activate attrition-env
-  pip install -r requirements.txt
-  ```
 
 **B. Akses Dataset**
 
